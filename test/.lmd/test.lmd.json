@@ -1,0 +1,9 @@
+{
+    "root": "../fixtures/",
+    "output": "../test.lmd.js",
+    "modules": {
+        "*": "*.js"
+    },
+    "main": "main",
+    "pack": true
+}
