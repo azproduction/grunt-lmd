@@ -1,6 +1,6 @@
 # grunt-contrib-lmd [![Build Status](https://secure.travis-ci.org/azproduction/grunt-contrib-lmd.png?branch=master)](http://travis-ci.org/azproduction/grunt-contrib-lmd)
 
-> Assemble LMD projects.
+> Build LMD projects.
 
 ## Getting Started
 Install this grunt plugin next to your project's [grunt.js gruntfile][getting_started] with: `npm install grunt-contrib-lmd`
