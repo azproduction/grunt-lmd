@@ -1,14 +1,14 @@
-# grunt-contrib-lmd [![Build Status](https://secure.travis-ci.org/azproduction/grunt-contrib-lmd.png?branch=master)](http://travis-ci.org/azproduction/grunt-contrib-lmd)
+# grunt-lmd [![Build Status](https://secure.travis-ci.org/azproduction/grunt-lmd.png?branch=master)](http://travis-ci.org/azproduction/grunt-lmd)
 
 Build LMD projects.
 
 ## Getting Started
-Install this grunt plugin next to your project's [grunt.js gruntfile][getting_started] with: `npm install grunt-contrib-lmd`
+Install this grunt plugin next to your project's [grunt.js gruntfile][getting_started] with: `npm install grunt-lmd`
 
 Then add this line to your project's `grunt.js` gruntfile:
 
 ```javascript
-grunt.loadNpmTasks('grunt-contrib-lmd');
+grunt.loadNpmTasks('grunt-lmd');
 ```
 
 [grunt]: https://github.com/gruntjs/grunt

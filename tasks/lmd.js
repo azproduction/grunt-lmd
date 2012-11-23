@@ -1,5 +1,5 @@
 /*
- * grunt-contrib-lmd
+ * grunt-lmd
  *
  * Copyright (c) 2012 Mikhail Davydov
  * Licensed under the MIT license.

@@ -1,23 +1,23 @@
 {
-  "name": "grunt-contrib-lmd",
+  "name": "grunt-lmd",
   "description": "Builds LMD projects.",
-  "version": "0.1.0",
-  "homepage": "https://github.com/azproduction/grunt-contrib-lmd",
+  "version": "0.1.1",
+  "homepage": "https://github.com/azproduction/grunt-lmd",
   "author": {
     "name": "Mikhail Davydov",
     "url": "http://azproduction.github.com/"
   },
   "repository": {
     "type": "git",
-    "url": "git://github.com/azproduction/grunt-contrib-lmd.git"
+    "url": "git://github.com/azproduction/grunt-lmd.git"
   },
   "bugs": {
-    "url": "https://github.com/azproduction/grunt-contrib-lmd/issues"
+    "url": "https://github.com/azproduction/grunt-lmd/issues"
   },
   "licenses": [
     {
       "type": "MIT",
-      "url": "https://github.com/azproduction/grunt-contrib-lmd/blob/master/LICENSE-MIT"
+      "url": "https://github.com/azproduction/grunt-lmd/blob/master/LICENSE-MIT"
     }
   ],
   "main": "grunt.js",

@@ -2,3 +2,7 @@ v0.1.0:
   date: 2012-11-09
   changes:
     - First release.
+v0.1.1:
+  date: 2012-11-23
+  changes:
+    - renamed to grunt-lmd.
