@@ -13,6 +13,7 @@ module.exports = function(grunt) {
 
   var LmdBuilder = require('lmd');
   var fs = require('fs');
+  var path = require('path');
 
   var createWritableFile = function (fileName) {
     return fs.createWriteStream(fileName, {
@@ -68,7 +69,7 @@ module.exports = function(grunt) {
       options.mixins = mixinBuilds;
     }
 
-    lmdFile =  projectRoot + '/.lmd/' + buildName + '.lmd.json';
+    lmdFile = path.join(projectRoot, '.lmd', buildName + '.lmd.json');
 
     buildResult = new LmdBuilder(lmdFile, options);
     buildConfig = buildResult.buildConfig;
@@ -86,10 +87,7 @@ module.exports = function(grunt) {
       }
     }
 
-    configDir = fs.realpathSync(lmdFile);
-    configDir = configDir.split(/\/|\\/);
-    configDir.pop();
-    configDir = configDir.join('/') + '/' + (buildConfig.root || "");
+    configDir = path.join(path.dirname(lmdFile), buildConfig.root || "");
 
     if (buildConfig.sourcemap) {
       buildResult.sourceMap.pipe(createWritableFile(configDir + buildConfig.sourcemap));
@@ -104,7 +102,7 @@ module.exports = function(grunt) {
     buildResult.pipe(createWritableFile(configDir + buildConfig.output));
     if (buildConfig.log) {
       buildResult.log.on('data', function (data) {
-        grunt.log.ok(data);
+        grunt.log.write(data);
       });
       buildResult.on('end', function () {
         grunt.log.ok('Writing LMD Package to ' + buildConfig.output.green);
