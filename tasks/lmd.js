@@ -90,7 +90,7 @@ module.exports = function(grunt) {
     configDir = path.join(path.dirname(lmdFile), buildConfig.root || "");
 
     if (buildConfig.sourcemap) {
-      buildResult.sourceMap.pipe(createWritableFile(configDir + buildConfig.sourcemap));
+      buildResult.sourceMap.pipe(createWritableFile(path.join(configDir, buildConfig.sourcemap)));
 
       if (buildConfig.log && buildConfig.output) {
         buildResult.sourceMap.on('end', function () {
@@ -99,7 +99,7 @@ module.exports = function(grunt) {
       }
     }
 
-    buildResult.pipe(createWritableFile(configDir + buildConfig.output));
+    buildResult.pipe(createWritableFile(path.join(configDir, buildConfig.output)));
     if (buildConfig.log) {
       buildResult.log.on('data', function (data) {
         grunt.log.write(data);
