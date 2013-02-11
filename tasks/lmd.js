@@ -15,11 +15,16 @@ module.exports = function(grunt) {
   var fs = require('fs');
   var path = require('path');
 
-  var createWritableFile = function (fileName) {
-    return fs.createWriteStream(fileName, {
-      flags: "w",
-      encoding: "utf8",
-      mode: 438 // 0666
+  var writeTo = function (stream, fileName) {
+    var data = '';
+
+    // have to write sync
+    stream.on('data', function (chunk) {
+      data += chunk;
+    });
+
+    stream.on('end', function () {
+      fs.writeFileSync(fileName, data, 'utf8');
     });
   };
 
@@ -90,7 +95,7 @@ module.exports = function(grunt) {
     configDir = path.join(path.dirname(lmdFile), buildConfig.root || "");
 
     if (buildConfig.sourcemap) {
-      buildResult.sourceMap.pipe(createWritableFile(path.join(configDir, buildConfig.sourcemap)));
+      writeTo(buildResult.sourceMap, path.join(configDir, buildConfig.sourcemap));
 
       if (buildConfig.log && buildConfig.output) {
         buildResult.sourceMap.on('end', function () {
@@ -99,7 +104,7 @@ module.exports = function(grunt) {
       }
     }
 
-    buildResult.pipe(createWritableFile(path.join(configDir, buildConfig.output)));
+    writeTo(buildResult, path.join(configDir, buildConfig.output));
     if (buildConfig.log) {
       buildResult.log.on('data', function (data) {
         grunt.log.write(data);
