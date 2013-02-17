@@ -2,6 +2,11 @@
 
 Build LMD projects.
 
+## Migration from grunt 0.3 to 0.4
+
+ - grunt-lmd >= 0.1.6 works with grunt 0.4
+ - grunt-lmd <= 0.1.5 works with grunt 0.3
+
 ## Getting Started
 Install this grunt plugin next to your project's [grunt.js gruntfile][getting_started] with: `npm install grunt-lmd`
 
@@ -12,7 +17,7 @@ grunt.loadNpmTasks('grunt-lmd');
 ```
 
 [grunt]: https://github.com/gruntjs/grunt
-[getting_started]: https://github.com/gruntjs/grunt/blob/master/docs/getting_started.md
+[getting_started]: https://github.com/gruntjs/grunt/wiki/Getting-started
 
 ### Overview
 
