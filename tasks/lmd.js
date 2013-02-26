@@ -9,6 +9,8 @@ module.exports = function (grunt) {
     'use strict';
 
     var LmdBuilder = require('lmd'),
+        LmdWriter = LmdBuilder.Writer,
+        Cli = LmdBuilder.Cli.LogWriter,
         fs = require('fs'),
         path = require('path');
 
@@ -39,7 +41,6 @@ module.exports = function (grunt) {
         var lmdFile;
         var buildResult;
         var buildConfig;
-        var configDir;
         var expectedStreams = 0;
         var tryDoneBuild = function () {
             expectedStreams--;
@@ -78,53 +79,34 @@ module.exports = function (grunt) {
 
         if (!buildConfig.output) {
             grunt.fail.warn('LMD failed: output path is not specified');
-            tryDoneBuild();
+            done();
             return;
         }
 
-        if (buildConfig.log && buildConfig.output) {
-            grunt.log.ok('Building `' + buildName + '` (' + lmdFile + ')');
-            if (mixinBuilds.length) {
-                grunt.log.ok('Extra mixins ' + mixinBuilds);
-            }
-        }
+        var cli = new Cli(process.stdout);
+        cli.ok = function (message) {
+            grunt.log.ok(message);
+        };
 
-        configDir = path.join(path.dirname(lmdFile), buildConfig.root || "");
+        cli.error = function (message) {
+            grunt.fail.warn(message);
+        };
 
-        if (buildConfig.sourcemap) {
-            writeTo(buildResult.sourceMap, path.join(configDir, buildConfig.sourcemap));
+        cli.warn = function (message) {
+            grunt.log.warn(message);
+        };
 
-            if (buildConfig.log && buildConfig.output) {
-                buildResult.sourceMap.on('end', function () {
-                    grunt.log.ok('Writing Source Map to ' + buildConfig.sourcemap.green);
-                });
-            }
-        }
+        var cwd = path.join(path.dirname(lmdFile), '..');
 
-        writeTo(buildResult, path.join(configDir, buildConfig.output));
-        if (buildConfig.log) {
-            buildResult.log.on('data', function (data) {
-                grunt.log.write(data);
+        new LmdWriter(buildResult)
+            .relativeTo(cwd)
+            .logTo(cli)
+            .writeAll(function (err) {
+                if (err) {
+                    grunt.fail.warn('Build failed');
+                }
+                done();
             });
-            buildResult.on('end', function () {
-                grunt.log.ok('Writing LMD Package to ' + buildConfig.output.green);
-            });
-        }
-
-        if (buildResult.log.readable) {
-            expectedStreams++;
-            buildResult.log.on('end', tryDoneBuild);
-        }
-
-        if (buildResult.readable) {
-            expectedStreams++;
-            buildResult.on('end', tryDoneBuild);
-        }
-
-        if (buildResult.sourceMap.readable) {
-            expectedStreams++;
-            buildResult.sourceMap.on('end', tryDoneBuild);
-        }
     });
 };
 

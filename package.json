@@ -1,7 +1,7 @@
 {
     "name": "grunt-lmd",
     "description": "Builds LMD projects.",
-    "version": "0.1.7",
+    "version": "0.1.8",
     "homepage": "https: //github.com/azproduction/grunt-lmd",
     "author": {
         "name": "Mikhail Davydov",
@@ -28,7 +28,7 @@
         "test": "./node_modules/.bin/grunt test"
     },
     "dependencies": {
-        "lmd": ">= 1.10.5",
+        "lmd": ">= 1.10.5-1",
         "grunt-lib-contrib": "0.5.x"
     },
     "devDependencies": {
