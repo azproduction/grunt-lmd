@@ -9,6 +9,8 @@ module.exports = function (grunt) {
     'use strict';
 
     var LmdBuilder = require('lmd'),
+        // TODO(azproduction) replace lmd/lib/lmd_common with proper name
+        getModuleFileByShortName = require('lmd/lib/lmd_common').getModuleFileByShortName,
         LmdWriter = LmdBuilder.Writer,
         Cli = LmdBuilder.Cli.LogWriter,
         fs = require('fs'),
@@ -36,6 +38,7 @@ module.exports = function (grunt) {
         var data = typeof this.data === "string" ? {build:this.data} : this.data;
         var options = data.options || {};
         var projectRoot = (data.projectRoot || './');
+        var lmdDir = path.join(projectRoot, '.lmd');
         var buildName;
         var mixinBuilds = data.build;
         var lmdFile;
@@ -65,14 +68,14 @@ module.exports = function (grunt) {
         }
 
         mixinBuilds = mixinBuilds.map(function (build) {
-            return './' + build + '.lmd.json';
+            return getModuleFileByShortName(lmdDir, build);
         });
 
         if (mixinBuilds.length) {
             options.mixins = mixinBuilds;
         }
 
-        lmdFile = path.join(projectRoot, '.lmd', buildName + '.lmd.json');
+        lmdFile = path.join(lmdDir, getModuleFileByShortName(lmdDir, buildName));
 
         buildResult = new LmdBuilder(lmdFile, options);
         buildConfig = buildResult.buildConfig;

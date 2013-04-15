@@ -30,14 +30,20 @@ module.exports = function (grunt) {
 
         // Before generating any new files, remove any previously-created files.
         clean: {
-            test: ['test/test.lmd.js', 'test/test-ru.lmd.js', 'test/extras.lmd.js']
+            test: [
+                'test/test.lmd.js',
+                'test/test-ru.lmd.js',
+                'test/test-js.lmd.js',
+                'test/test-js-ru-js.lmd.js',
+                'test/extras.lmd.js'
+            ]
         },
 
         // Configuration to be run (and then tested).
         lmd:  {
             compile:  {
                 projectRoot:  'test/',
-                build:  'test'
+                build: 'test'
             },
             mixin:  {
                 projectRoot: 'test/',
@@ -45,6 +51,20 @@ module.exports = function (grunt) {
                 options: {
                     // output is relative to the root dir in LMD build config file
                     output: '../test-ru.lmd.js',
+                    log: true,
+                    warn: true
+                }
+            },
+            compile_js:  {
+                projectRoot:  'test/',
+                build: 'test-js'
+            },
+            mixin_js:  {
+                projectRoot: 'test/',
+                build: 'test-js+ru-js',
+                options: {
+                    // output is relative to the root dir in LMD build config file
+                    output: '../test-js-ru-js.lmd.js',
                     log: true,
                     warn: true
                 }
@@ -81,5 +101,5 @@ module.exports = function (grunt) {
     grunt.registerTask('test', ['clean', 'lmd', 'nodeunit']);
 
     // By default, lint and run all tests.
-    grunt.registerTask('default', ['lint', 'test']);
+    grunt.registerTask('default', ['jshint', 'test']);
 };
