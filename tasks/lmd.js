@@ -80,11 +80,15 @@ module.exports = function (grunt) {
         buildResult = new LmdBuilder(lmdFile, options);
         buildConfig = buildResult.buildConfig;
 
-        if (!buildConfig.output) {
+        var output = buildConfig.output;
+
+        if (!output) {
             grunt.fail.warn('LMD failed: output path is not specified');
             done();
             return;
         }
+
+        grunt.file.mkdir(path.dirname(output));
 
         var cli = new Cli(process.stdout);
         cli.ok = function (message) {
