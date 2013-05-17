@@ -1,7 +1,7 @@
 {
     "name": "grunt-lmd",
     "description": "Builds LMD projects.",
-    "version": "0.1.11",
+    "version": "0.1.12",
     "homepage": "https: //github.com/azproduction/grunt-lmd",
     "author": {
         "name": "Mikhail Davydov",
