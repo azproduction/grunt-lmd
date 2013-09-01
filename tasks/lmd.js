@@ -16,24 +16,10 @@ module.exports = function (grunt) {
         fs = require('fs'),
         path = require('path');
 
-    var writeTo = function (stream, fileName) {
-        var data = '';
-
-        // have to write sync
-        stream.on('data', function (chunk) {
-            data += chunk;
-        });
-
-        stream.on('end', function () {
-            fs.writeFileSync(fileName, data, 'utf8');
-        });
-    };
-
     grunt.registerMultiTask('lmd', 'Build a LMD project.', function () {
 
         var _ = grunt.util._;
         var kindOf = grunt.util.kindOf;
-        var helpers = require('grunt-lib-contrib').init(grunt);
         var done = this.async();
         var data = typeof this.data === "string" ? {build:this.data} : this.data;
         var options = data.options || {};
@@ -44,13 +30,6 @@ module.exports = function (grunt) {
         var lmdFile;
         var buildResult;
         var buildConfig;
-        var expectedStreams = 0;
-        var tryDoneBuild = function () {
-            expectedStreams--;
-            if (expectedStreams <= 0) {
-                done();
-            }
-        };
 
         _.each(options, function (value, key) {
             if (kindOf(value) === 'string') {
