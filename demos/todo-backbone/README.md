@@ -5,7 +5,7 @@ there
  - src - raw application files, assets and lmd config file
  - output - compiled js for dev ( buffer preventing
 deployment of files with errors to production )
--production - final application deployment destination
+ - production - final application deployment destination
 ###Try it
 ```cd grunt```  
 
