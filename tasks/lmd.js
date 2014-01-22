@@ -88,10 +88,13 @@ module.exports = function (grunt) {
             .relativeTo(cwd)
             .logTo(cli)
             .writeAll(function (err) {
-                if (err) {
-                    grunt.fail.warn('Build failed');
-                }
-                done();
+                setTimeout(function () {
+                    if (err) {
+                        console.log('This command can help find the problem: "cd ' + cwd + ' && lmd info ' + data.build + ' && cd -"');
+                        grunt.fail.warn(err);
+                    }
+                    done();
+                }, 0);
             });
     });
 };
