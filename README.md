@@ -8,7 +8,7 @@ Build LMD projects.
  - grunt-lmd <= 0.1.5 works with grunt 0.3
 
 ## Getting Started
-Install this grunt plugin next to your project's [grunt.js gruntfile][getting_started] with: `npm install grunt-lmd`
+Install this grunt plugin next to your project's grunt.js gruntfile with: `npm install grunt-lmd`
 
 Then add this line to your project's `grunt.js` gruntfile:
 
@@ -18,6 +18,8 @@ grunt.loadNpmTasks('grunt-lmd');
 
 [grunt]: https://github.com/gruntjs/grunt
 [getting_started]: https://github.com/gruntjs/grunt/wiki/Getting-started
+
+See also [lmd/examples](https://github.com/azproduction/lmd/tree/master/examples)
 
 ### Overview
 
