@@ -28,8 +28,7 @@
         "test": "./node_modules/.bin/grunt test"
     },
     "dependencies": {
-        "lmd": ">=1.10.5-4",
-        "grunt-lib-contrib": "0.5.x"
+        "lmd": ">=1.10.5-4"
     },
     "devDependencies": {
         "grunt": "0.4.x",
