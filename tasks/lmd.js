@@ -67,7 +67,7 @@ module.exports = function (grunt) {
             return;
         }
 
-        grunt.file.mkdir(path.dirname(path.join(lmdDir, buildConfig.root, output)));
+        grunt.file.mkdir(path.dirname(path.resolve(lmdDir, buildConfig.root, output)));
 
         var cli = new Cli(process.stdout);
         cli.ok = function (message) {
